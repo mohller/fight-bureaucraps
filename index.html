@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travel Forms Assistant</title>
+
+    <!-- <link rel="stylesheet" href="https://pyscript.net/alpha/pyscript.css" /> -->
+    <!-- <script defer src="https://pyscript.net/alpha/pyscript.js"></script> -->
+
+    <style>
+        body {
+            font-family: Verdana, sans-serif;
+            background-color:aliceblue
+        }
+        
+        h1 {
+            text-align: center;
+            color: blueviolet;
+            font-size: 30px;
+        }
+
+        h3 {
+            text-align: center;
+        }
+
+
+    </style>
+
+</head>
+<body>
+
+    <div >
+        <h1>Travel form preparation</h1>
+    
+        <p>
+            This is tool is an attempt to streamline the process of applying for travels.<br>
+            It was born out of the need to reduce the time, effort, and frustration caused by the unwillingness to help and unfriendliness of bureaucrats hired to, at least in part, do the job that this tool is aimed to help with.
+        </p>
+    </div>
+
+    <div>
+        <h3 title="Information related only to the traveler.">
+            Traveler information
+        </h3>
+
+        <form>
+            <label for="fname">First name:</label>
+            <input type="text" id="fname" name="fname" title="First given name.">
+            
+            <label for="lname">Last name:</label>
+            <input type="text" id="lname" name="lname" title="Last given name."><br>
+
+            <label for="email">Email:</label>
+            <input type="text" id="email" name="email">
+            
+            <label for="telext">Tel. Ext.:</label>
+            <input type="text" id="telext" name="telext" title="The last four digits of the phone number in your office."><br>
+        </form>
+
+    </div>
+
+<div>
+    <h3 title="Information related only to the traveler.">
+        Trip information
+    </h3>
+
+    <form>
+        <label for="destination">Destination:</label>
+        <input type="text" id="destination" name="destination" title="Destination of the work travel.">
+        
+        <label for="reason">Reason:</label>
+        <input type="text" id="reason" name="reason" title="Event to attend or any other reason for the travel."><br>
+
+        <label for="departure_date">Departure Details:</label>
+        <input type="date" id="departure_date" name="departure_date" title="The planned date of departure.">
+        
+        <label for="departure_time">:</label>
+        <input type="time" id="departure_time" name="departure_time" title="The expected time of departure. It does not need to be precise, but it counts for the calculation of the daily allowance."><br>
+
+        <label for="Arrival_date">Arrival Details:</label>
+        <input type="date" id="Arrival_date" name="Arrival_date" title="The planned date of Arrival.">
+        
+        <label for="Arrival_time">:</label>
+        <input type="time" id="Arrival_time" name="Arrival_time" title="The expected time of Arrival. It does not need to be precise, but it counts for the calculation of the daily allowance."><br>
+    </form>
+</div>
+
+<button id="submit-button" type="submit" pys-onClick="my_function">OK</button>
+<button id="submit" type='submit' pys-onClick="my_function">
+    Create Forms
+</button>
+
+<div id="test-output">
+    something
+</div>
+
+<!-- <py-script>
+
+def my_function():
+    # pyscript.write('test-output', 'paco')
+
+    Element('test-output').element.innerText = 'else'
+
+</py-script> -->
+
+</body>
+</html>
