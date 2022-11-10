@@ -7,7 +7,7 @@
     <title>Travel Forms Assistant</title>
 
     <!-- <link rel="stylesheet" href="https://pyscript.net/alpha/pyscript.css" /> -->
-    <!-- <script defer src="https://pyscript.net/alpha/pyscript.js"></script> -->
+    <script defer src="https://pyscript.net/alpha/pyscript.js"></script>
 
     <style>
         body {
@@ -25,9 +25,43 @@
             text-align: center;
         }
 
+        .cell {
+            width: 1.0rem;
+            font-size: 30px;
+        }
 
+        .iban_cell {
+            width: .9rem;
+            font-size: 22px;
+        }
+
+        .costs {
+            width: 4rem;
+        }   
+
+        fieldset {
+            width: 40rem;
+        }
+        
+        .inset_fieldset {
+            width: 38rem;
+        }
+
+        #submit-button {
+            font-size: x-large;
+        }
+
+        .tier_group {
+            align-items: center;
+        }
     </style>
 
+    <py-env>
+- PyPDF2
+- paths:
+    - /src.py
+    - /aaa_filled-out.pdf
+    </py-env>
 </head>
 <body>
 
@@ -41,69 +75,256 @@
     </div>
 
     <div>
-        <h3 title="Information related only to the traveler.">
-            Traveler information
-        </h3>
+        <label for="template_form">Clone existing form:</label><br>
+        <input type="file" id="template_form" name="template_form">
+    </div>
 
-        <form>
+    <form autocomplete="on">
+        
+        <div class="tier_group">
+        <fieldset>
+            <legend>Traveler information</legend>
+
             <label for="fname">First name:</label>
             <input type="text" id="fname" name="fname" title="First given name.">
             
             <label for="lname">Last name:</label>
             <input type="text" id="lname" name="lname" title="Last given name."><br>
-
+            
             <label for="email">Email:</label>
             <input type="text" id="email" name="email">
             
             <label for="telext">Tel. Ext.:</label>
             <input type="text" id="telext" name="telext" title="The last four digits of the phone number in your office."><br>
-        </form>
+            
+            <label for="faculty">Faculty:</label>
+            <input type="text" id="faculty" name="faculty" title="The faculty to which you belong."><br>
 
-    </div>
+            <label for="position">Position:</label>
+            <input type="text" id="position" name="position" title="Your position, i.e. PhD student, Postdoc, etc."><br>
 
-<div>
-    <h3 title="Information related only to the traveler.">
-        Trip information
-    </h3>
+            <label for="workplace">Workplace:</label>
+            <input type="text" id="workplace" name="workplace" title="University Campus"><br>
 
-    <form>
-        <label for="destination">Destination:</label>
-        <input type="text" id="destination" name="destination" title="Destination of the work travel.">
+            <label for="residence">Place of residence:</label>
+            <input type="text" id="residence" name="residence" title="Your home address."><br>
+        </fieldset>
+    
+
+        <fieldset>
+            <legend>Funding information</legend>
+            
+            <fieldset class="inset_fieldset">
+                <legend>Costcenter</legend>
+
+                <input type="text" id="cell-8" class="cell" value="6">
+                <input type="text" id="cell-7" class="cell" value="8">
+                <input type="text" id="cell-6" class="cell" value="5">
+                <input type="text" id="cell-5" class="cell" value="0">
+                <input type="text" id="cell-4" class="cell" value="0">
+                <input type="text" id="cell-3" class="cell" value="0">
+                <input type="text" id="cell-2" class="cell" value="0">
+                <input type="text" id="cell-1" class="cell" value="1">
+                <input type="text" id="cell00" class="cell" value="0">
+                
+                <input type="text" id="cell01" class="cell">
+                <input type="text" id="cell02" class="cell">
+                <input type="text" id="cell03" class="cell">
+                <input type="text" id="cell04" class="cell">
+                <input type="text" id="cell05" class="cell">
+                <input type="text" id="cell06" class="cell">
+                <input type="text" id="cell07" class="cell">
+                <input type="text" id="cell08" class="cell">
+                <input type="text" id="cell09" class="cell">
+                <input type="text" id="cell10" class="cell">
+                <input type="text" id="cell11" class="cell"><br>    
+                
+                <input type="checkbox" id="advance_money">
+                <label for="advance_money">Request advance money:</label>
+            </fieldset>
+            
+            <fieldset class="inset_fieldset">
+                <legend>Anticipated costs</legend>
+                
+                <div>
+                    <label for="transport_costs">Transport costs (euro)</label>
+                    <input class="costs" type="number" id="transport_costs"><br>
         
-        <label for="reason">Reason:</label>
-        <input type="text" id="reason" name="reason" title="Event to attend or any other reason for the travel."><br>
-
-        <label for="departure_date">Departure Details:</label>
-        <input type="date" id="departure_date" name="departure_date" title="The planned date of departure.">
+                    <label for="overnight_costs">Overnight costs (euro)</label>
+                    <input class="costs" type="number" id="overnight_costs"><br>
         
-        <label for="departure_time">:</label>
-        <input type="time" id="departure_time" name="departure_time" title="The expected time of departure. It does not need to be precise, but it counts for the calculation of the daily allowance."><br>
+                    <label for="event_fees">Participation fees (euro)</label>
+                    <input class="costs" type="number" id="event_fees"><br>
+                    
+                    <label for="additional_costs">Additional costs (euro)</label>
+                    <input class="costs" type="number" id="additional_costs"><br>
+                </div>
 
-        <label for="Arrival_date">Arrival Details:</label>
-        <input type="date" id="Arrival_date" name="Arrival_date" title="The planned date of Arrival.">
+                <div>
+                    <input type="checkbox" id="wave_all" title="I wish to waive the costs. I am only preparing the form for insurance purposes.">
+                    <label for="wave_all">I wave all the costs</label><br>
+                    
+                    <input type="checkbox" id="wave_allowance" title="I wish to waive the daily allowances.">
+                    <label for="wave_allowance">I wave the daily allowance</label><br>
+            
+                    <input type="checkbox" id="wave_overnight" title="I wish to waive the flat-rate overnight costs.">
+                    <label for="wave_overnight">I wave the flat-rate overnight costs</label><br>
+                </div>
+
+                <div>
+                    <input name="funding" type="radio" id="funding_nrw" title="The default option.">
+                    <label for="funding_nrw">In accordance with the NRW State Travel Expenses Act</label>
+                    
+                    <input name="funding" type="radio" id="funding_third_party" title="If applicable for third-party funded projects).
+                    Please be sure to enclose the guidelines for use of the third-party funder.">
+                    <label for="funding_third_party">In accordance with the German Federal Travel Expenses Act</label><br>
+            
+                    <label for="funding_max">Maximum travel allowance (eur)</label>
+                    <input class="costs" type="text" id="funding_max" title="I wish to waive the flat-rate overnight costs.">
+                </div>
+
+            </fieldset>
         
-        <label for="Arrival_time">:</label>
-        <input type="time" id="Arrival_time" name="Arrival_time" title="The expected time of Arrival. It does not need to be precise, but it counts for the calculation of the daily allowance."><br>
+        </fieldset>
+        </div>
+
+        <div class="tier_group">
+        <fieldset>
+            <legend>Travel information</legend>
+
+            <label for="reason">Reason:</label>
+            <input type="text" id="reason" name="reason" title="Event to attend or any other reason for the travel."><br>
+            
+            <label for="destination">Destination:</label>
+            <input type="text" id="destination" name="destination" title="Destination of the work travel."><br>
+            
+            <label for="start_date">Event begining time:</label>
+            <input type="date" id="start_date" name="start_date" title="The time in which the event begins."><br>
+            
+            <label for="departure_date">Departure Details:</label>
+            <input type="date" id="departure_date" name="departure_date" title="The planned date of departure.">
+            
+            <label for="departure_time">:</label>
+            <input type="time" id="departure_time" name="departure_time" title="The expected time of departure. It does not need to be precise, but it counts for the calculation of the daily allowance."><br>
+            
+            <label for="arrival_date">Arrival Details:</label>
+            <input type="date" id="arrival_date" name="arrival_date" title="The planned date of arrival.">
+            
+            <label for="arrival_time">:</label>
+            <input type="time" id="arrival_time" name="arrival_time" title="The expected time of Arrival. It does not need to be precise, but it counts for the calculation of the daily allowance."><br>
+
+            <fieldset class="inset_fieldset">
+                <legend>Means of transportation</legend>
+                <input name="transport_means" type="radio" id="means_flight">
+                <label for="means_flight">Flight</label><br>
+        
+                <input name="transport_means" type="radio" id="means_train">
+                <label for="means_train">Train</label><br>
+        
+                <input name="transport_means" type="radio" id="means_private_car">
+                <label for="means_private_car">Private car</label><br>
+
+                <input name="transport_means" type="radio" id="means_company_car">
+                <label for="means_company_car">Company car</label><br>
+
+                <input name="transport_means" type="radio" id="means_rental_car">
+                <label for="means_rental_car">Rental car</label><br>
+            </fieldset>
+
+            <fieldset class="inset_fieldset">
+                <legend>Train card</legend>
+                
+                <input name="bahncard" type="radio" id="no_card">
+                <label for="no_card">I own no card</label>
+                
+                <input name="bahncard" type="radio" id="card_100">
+                <label for="card_100">I own BahnCard 100</label><br>
+        
+                <input name="bahncard" type="radio" id="card_25">
+                <label for="card_25">I own BahnCard 25</label>
+                
+                <input name="bahncard" type="radio" id="card_25B">
+                <label for="card_25B">I own BahnCard Business 25</label><br>
+
+                <input name="bahncard" type="radio" id="card_50">
+                <label for="card_50">I own BahnCard 50</label>
+                
+                <input name="bahncard" type="radio" id="card_50B">
+                <label for="card_50B">I own BahnCard Business 50</label><br>
+            </fieldset>
+        
+        </fieldset>
+        </div>
+
+        <fieldset>
+            <legend>Payment details</legend>
+
+            <label for="holder">Account holder</label>
+            <input type="text" id="holder" name="holder" title="Full name of account holder."><br>
+            
+            <label for="bankname">Bank Name</label>
+            <input type="text" id="bankname" name="bankname" title="Bank Name."><br>
+            
+            <label for="bic">BIC</label>
+            <input type="text" id="bic" name="bic" title="BIC."><br>
+
+            
+            <legend>IBAN</legend>
+
+            <input type="text" id="iban_cell01" class="iban_cell">
+            <input type="text" id="iban_cell02" class="iban_cell">
+            <input type="text" id="iban_cell03" class="iban_cell">
+            <input type="text" id="iban_cell04" class="iban_cell">
+            <input type="text" id="iban_cell05" class="iban_cell">
+            <input type="text" id="iban_cell06" class="iban_cell">
+            <input type="text" id="iban_cell07" class="iban_cell">
+            <input type="text" id="iban_cell08" class="iban_cell">
+            <input type="text" id="iban_cell09" class="iban_cell">
+            <input type="text" id="iban_cell10" class="iban_cell">
+            <input type="text" id="iban_cell11" class="iban_cell">
+            <input type="text" id="iban_cell12" class="iban_cell">
+            <input type="text" id="iban_cell13" class="iban_cell">
+            <input type="text" id="iban_cell14" class="iban_cell">
+            <input type="text" id="iban_cell15" class="iban_cell">
+            <input type="text" id="iban_cell16" class="iban_cell">
+            <input type="text" id="iban_cell17" class="iban_cell">
+            <input type="text" id="iban_cell18" class="iban_cell">
+            <input type="text" id="iban_cell19" class="iban_cell">
+            <input type="text" id="iban_cell20" class="iban_cell">
+            <input type="text" id="iban_cell21" class="iban_cell">
+            <input type="text" id="iban_cell22" class="iban_cell"><br>
+            
+
+        </fieldset>
+
+        <button id="submit-button" type="submit" pys-onClick="read_pdf_template">
+            Create Form
+        </button>
     </form>
-</div>
 
-<button id="submit-button" type="submit" pys-onClick="my_function">OK</button>
-<button id="submit" type='submit' pys-onClick="my_function">
-    Create Forms
-</button>
 
-<div id="test-output">
-    something
-</div>
+    <py-script>
 
-<!-- <py-script>
+        from src import *
+        from PyPDF2 import PdfReader, PdfWriter
+        
+        def read_pdf_template(*args, **kwargs):
 
-def my_function():
-    # pyscript.write('test-output', 'paco')
+            template_file_name = document.getElementById('template_form').value
+            reader = PdfReader('aaa_filled-out.pdf')
+            fields = reader.get_form_text_fields()
 
-    Element('test-output').element.innerText = 'else'
+            pyscript.write('content', fields.keys())
+            Element('fname').element.value = template_file_name
+        
+        def fill_all_fields(input_data):
 
-</py-script> -->
+            for element_id, value in input_data.items():
+                Element(element_id).element.value = value
+
+        # fill_all_fields()
+
+    </py-script>
 
 </body>
 </html>
