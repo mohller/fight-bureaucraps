@@ -12,9 +12,19 @@
     <style>
         body {
             font-family: Verdana, sans-serif;
-            background-color:aliceblue
+            background-color:aliceblue;
+            max-width: 80%;
         }
         
+        .ac_insets {
+            float: left;
+        }
+
+        #header_section {
+            width: 40rem;
+            float: left;
+        }
+
         h1 {
             text-align: center;
             color: blueviolet;
@@ -53,6 +63,7 @@
 
         .tier_group {
             align-items: center;
+            max-width: 45rem;
         }
     </style>
 
@@ -60,12 +71,12 @@
 - PyPDF2
 - paths:
     - /src.py
-    - /aaa_filled-out.pdf
+    - templates/aaa_filled-out.pdf
     </py-env>
 </head>
 <body>
 
-    <div >
+    <div id="header_section">
         <h1>Travel form preparation</h1>
     
         <p>
@@ -82,108 +93,108 @@
     <form autocomplete="on">
         
         <div class="tier_group">
-        <fieldset>
-            <legend>Traveler information</legend>
+            <fieldset>
+                <legend>Traveler information</legend>
 
-            <label for="fname">First name:</label>
-            <input type="text" id="fname" name="fname" title="First given name.">
-            
-            <label for="lname">Last name:</label>
-            <input type="text" id="lname" name="lname" title="Last given name."><br>
-            
-            <label for="email">Email:</label>
-            <input type="text" id="email" name="email">
-            
-            <label for="telext">Tel. Ext.:</label>
-            <input type="text" id="telext" name="telext" title="The last four digits of the phone number in your office."><br>
-            
-            <label for="faculty">Faculty:</label>
-            <input type="text" id="faculty" name="faculty" title="The faculty to which you belong."><br>
-
-            <label for="position">Position:</label>
-            <input type="text" id="position" name="position" title="Your position, i.e. PhD student, Postdoc, etc."><br>
-
-            <label for="workplace">Workplace:</label>
-            <input type="text" id="workplace" name="workplace" title="University Campus"><br>
-
-            <label for="residence">Place of residence:</label>
-            <input type="text" id="residence" name="residence" title="Your home address."><br>
-        </fieldset>
-    
-
-        <fieldset>
-            <legend>Funding information</legend>
-            
-            <fieldset class="inset_fieldset">
-                <legend>Costcenter</legend>
-
-                <input type="text" id="cell-8" class="cell" value="6">
-                <input type="text" id="cell-7" class="cell" value="8">
-                <input type="text" id="cell-6" class="cell" value="5">
-                <input type="text" id="cell-5" class="cell" value="0">
-                <input type="text" id="cell-4" class="cell" value="0">
-                <input type="text" id="cell-3" class="cell" value="0">
-                <input type="text" id="cell-2" class="cell" value="0">
-                <input type="text" id="cell-1" class="cell" value="1">
-                <input type="text" id="cell00" class="cell" value="0">
+                <label for="fname">First name:</label>
+                <input type="text" id="fname" name="fname" title="First given name.">
                 
-                <input type="text" id="cell01" class="cell">
-                <input type="text" id="cell02" class="cell">
-                <input type="text" id="cell03" class="cell">
-                <input type="text" id="cell04" class="cell">
-                <input type="text" id="cell05" class="cell">
-                <input type="text" id="cell06" class="cell">
-                <input type="text" id="cell07" class="cell">
-                <input type="text" id="cell08" class="cell">
-                <input type="text" id="cell09" class="cell">
-                <input type="text" id="cell10" class="cell">
-                <input type="text" id="cell11" class="cell"><br>    
+                <label for="lname">Last name:</label>
+                <input type="text" id="lname" name="lname" title="Last given name."><br>
                 
-                <input type="checkbox" id="advance_money">
-                <label for="advance_money">Request advance money:</label>
+                <label for="email">Email:</label>
+                <input type="text" id="email" name="email">
+                
+                <label for="telext">Tel. Ext.:</label>
+                <input type="text" id="telext" name="telext" title="The last four digits of the phone number in your office."><br>
+                
+                <label for="faculty">Faculty:</label>
+                <input type="text" id="faculty" name="faculty" title="The faculty to which you belong."><br>
+
+                <label for="position">Position:</label>
+                <input type="text" id="position" name="position" title="Your position, i.e. PhD student, Postdoc, etc."><br>
+
+                <label for="workplace">Workplace:</label>
+                <input type="text" id="workplace" name="workplace" title="University Campus"><br>
+
+                <label for="residence">Place of residence:</label>
+                <input type="text" id="residence" name="residence" title="Your home address."><br>
             </fieldset>
-            
-            <fieldset class="inset_fieldset">
-                <legend>Anticipated costs</legend>
+        
+
+            <fieldset>
+                <legend>Funding information</legend>
                 
-                <div>
-                    <label for="transport_costs">Transport costs (euro)</label>
-                    <input class="costs" type="number" id="transport_costs"><br>
-        
-                    <label for="overnight_costs">Overnight costs (euro)</label>
-                    <input class="costs" type="number" id="overnight_costs"><br>
-        
-                    <label for="event_fees">Participation fees (euro)</label>
-                    <input class="costs" type="number" id="event_fees"><br>
-                    
-                    <label for="additional_costs">Additional costs (euro)</label>
-                    <input class="costs" type="number" id="additional_costs"><br>
-                </div>
+                <fieldset class="inset_fieldset">
+                    <legend>Costcenter</legend>
 
-                <div>
-                    <input type="checkbox" id="wave_all" title="I wish to waive the costs. I am only preparing the form for insurance purposes.">
-                    <label for="wave_all">I wave all the costs</label><br>
+                    <input type="text" id="cell-8" class="cell" value="6" disabled>
+                    <input type="text" id="cell-7" class="cell" value="8" disabled>
+                    <input type="text" id="cell-6" class="cell" value="5" disabled>
+                    <input type="text" id="cell-5" class="cell" value="0" disabled>
+                    <input type="text" id="cell-4" class="cell" value="0" disabled>
+                    <input type="text" id="cell-3" class="cell" value="0" disabled>
+                    <input type="text" id="cell-2" class="cell" value="0" disabled>
+                    <input type="text" id="cell-1" class="cell" value="1" disabled>
+                    <input type="text" id="cell00" class="cell" value="0" disabled>
                     
-                    <input type="checkbox" id="wave_allowance" title="I wish to waive the daily allowances.">
-                    <label for="wave_allowance">I wave the daily allowance</label><br>
+                    <input type="text" id="cell01" class="cell">
+                    <input type="text" id="cell02" class="cell">
+                    <input type="text" id="cell03" class="cell">
+                    <input type="text" id="cell04" class="cell">
+                    <input type="text" id="cell05" class="cell">
+                    <input type="text" id="cell06" class="cell">
+                    <input type="text" id="cell07" class="cell">
+                    <input type="text" id="cell08" class="cell">
+                    <input type="text" id="cell09" class="cell">
+                    <input type="text" id="cell10" class="cell">
+                    <input type="text" id="cell11" class="cell"><br>    
+                    
+                    <input type="checkbox" id="advance_money">
+                    <label for="advance_money">Request advance money:</label>
+                </fieldset>
             
-                    <input type="checkbox" id="wave_overnight" title="I wish to waive the flat-rate overnight costs.">
-                    <label for="wave_overnight">I wave the flat-rate overnight costs</label><br>
-                </div>
-
-                <div>
-                    <input name="funding" type="radio" id="funding_nrw" title="The default option.">
-                    <label for="funding_nrw">In accordance with the NRW State Travel Expenses Act</label>
+                <fieldset class="inset_fieldset">
+                    <legend>Anticipated costs</legend>
                     
-                    <input name="funding" type="radio" id="funding_third_party" title="If applicable for third-party funded projects).
-                    Please be sure to enclose the guidelines for use of the third-party funder.">
-                    <label for="funding_third_party">In accordance with the German Federal Travel Expenses Act</label><br>
+                    <div class="ac_insets">
+                        <label for="transport_costs">Transport costs (euro)</label>
+                        <input class="costs" type="number" id="transport_costs"><br>
             
-                    <label for="funding_max">Maximum travel allowance (eur)</label>
-                    <input class="costs" type="text" id="funding_max" title="I wish to waive the flat-rate overnight costs.">
-                </div>
+                        <label for="overnight_costs">Overnight costs (euro)</label>
+                        <input class="costs" type="number" id="overnight_costs"><br>
+            
+                        <label for="event_fees">Participation fees (euro)</label>
+                        <input class="costs" type="number" id="event_fees"><br>
+                        
+                        <label for="additional_costs">Additional costs (euro)</label>
+                        <input class="costs" type="number" id="additional_costs"><br>
+                    </div>
 
-            </fieldset>
+                    <div class="ac_insets">
+                        <input type="checkbox" id="wave_all" title="I wish to waive the costs. I am only preparing the form for insurance purposes.">
+                        <label for="wave_all">I wave all the costs</label><br>
+                        
+                        <input type="checkbox" id="wave_allowance" title="I wish to waive the daily allowances.">
+                        <label for="wave_allowance">I wave the daily allowance</label><br>
+                
+                        <input type="checkbox" id="wave_overnight" title="I wish to waive the flat-rate overnight costs.">
+                        <label for="wave_overnight">I wave the flat-rate overnight costs</label><br>
+                    </div>
+
+                    <div class="ac_insets">
+                        <input name="funding" type="radio" id="funding_nrw" title="The default option.">
+                        <label for="funding_nrw">In accordance with the NRW State Travel Expenses Act</label><br>
+                        
+                        <input name="funding" type="radio" id="funding_third_party" title="If applicable for third-party funded projects).
+                        Please be sure to enclose the guidelines for use of the third-party funder.">
+                        <label for="funding_third_party">In accordance with the German Federal Travel Expenses Act</label><br>
+                
+                        <input name="funding" type="radio" id="funding_nrw" title="The default option.">
+                        <label for="funding_max">Limit maximum travel allowance (eur)</label>
+                        <input class="costs" type="text" id="funding_max" title="I wish to waive costs exceeding the specified amount.">
+                    </div>
+                </fieldset>
         
         </fieldset>
         </div>
@@ -302,8 +313,10 @@
         </button>
     </form>
 
-
-    <py-script>
+    <py-script src="src.py">
+        import asymcio
+        from js import document
+        from pyodide import create_proxy
 
         from src import *
         from PyPDF2 import PdfReader, PdfWriter
@@ -324,6 +337,24 @@
 
         # fill_all_fields()
 
+        async def process_file(event):
+            # Currently, PyScript print() does not work in this 
+            # type of code (async callbacks)
+            # use console.log() to debug output
+
+            fileList = event.target.files.to_py()
+
+            for f in fileList:
+                data = await f.text()
+                Element("fname").value = data
+
+            template_file_name = document.getElementById('template_form').value
+            reader = PdfReader('aaa_filled-out.pdf')
+            fields = reader.get_form_text_fields()
+
+            pyscript.write('content', fields.keys())
+            Element('fname').element.value = template_file_name
+    
     </py-script>
 
 </body>
